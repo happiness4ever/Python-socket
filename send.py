@@ -17,7 +17,9 @@ def socket_client():
 	filepath=raw_input('please input file path')
 	if os.path.isfile(filepath):
 	    fileinfo_size=struct.calcsize('128sl')
-	    fhead=struct.pack('128sl
+	    fhead=struct.pack('128sl',os.path.basename(filepath),
+			      os.stat(filepath).st_size)
+	    s.send(fhead)
 	    print 'client filepath:{0}'.format(filepath)
 
 	    fp=open(filepath,'rb')
@@ -32,6 +34,4 @@ def socket_client():
 
 
 if __name__=='__main__':
-    socket_client()',os.path.basename(filepath),
-			      os.stat(filepath).st_size)
-	    s.send(fhead)
+    socket_client()
